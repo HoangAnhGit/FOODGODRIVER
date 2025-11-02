@@ -12,6 +12,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FOODGODRIVER">
         <activity
+            android:name=".DetailOrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ReceiveOrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileMenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity2"
+            android:exported="false"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/Theme.FOODGODRIVER.NoActionBar" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
