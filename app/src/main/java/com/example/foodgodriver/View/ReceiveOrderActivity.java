@@ -1,20 +1,18 @@
-package com.example.foodgodriver;
+package com.example.foodgodriver.View;
 
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Button;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import com.example.foodgodriver.R;
 
 public class ReceiveOrderActivity extends AppCompatActivity {
 
 
     Button btnAccept;
-    int timeLeft = 12;
+    int timeLeft = 30;
     Handler handler = new Handler();
 
     @Override

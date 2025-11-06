@@ -10,6 +10,11 @@
         <item name="cornerRadius">12dp</item>
     </style>
 
+
+    <style name="TextAppearance.FoodGo" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textSize">14sp</item>
+    </style>
+
     <!-- 🔹 TextInput (EditText) -->
     <style name="Widget.FoodGo.TextInput" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxStrokeColor">#64C9D1</item>
