@@ -8,6 +8,7 @@
 
     <!-- Header: Avatar + Tên + Trạng thái -->
     <LinearLayout
+        android:id="@+id/layout_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -82,11 +83,11 @@
             android:id="@+id/btn_toggle_status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sẵn sàng hoạt động"
+            android:text="Tạm Nghỉ"
             android:textColor="@android:color/white"
             android:textStyle="bold"
             android:textAllCaps="false"
-            android:backgroundTint="@color/colorPrimary"
+            android:backgroundTint="@android:color/darker_gray"
             android:paddingVertical="10dp" />
     </LinearLayout>
 

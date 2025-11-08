@@ -20,6 +20,11 @@
     <string name="password_again">Nhập lại mật khẩu</string>
     <string name="login">Đăng nhập</string>
     <string name="register">Đăng kí</string>
+
+    <string name="register_now">Đăng ký ngay</string>
+    <string name="login_now"> Đăng nhâp </string>
+    <string name="question_register">Bạn chưa có tài khoản?</string>
+    <string name="question_login">Bạn chưa có tài khoản?</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

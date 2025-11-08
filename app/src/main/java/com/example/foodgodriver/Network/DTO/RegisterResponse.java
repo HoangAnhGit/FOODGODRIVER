@@ -1,0 +1,11 @@
+package com.example.foodgodriver.Network.DTO;
+
+public class RegisterResponse {
+    private String title;
+    private String status;
+    private Object errors; // có thể là Map<String, List<String>>
+
+    public String getTitle() { return title; }
+    public String getStatus() { return status; }
+    public Object getErrors() { return errors; }
+}
