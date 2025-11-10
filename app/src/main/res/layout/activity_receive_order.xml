@@ -62,7 +62,7 @@
             android:layout_marginTop="6dp">
 
             <TextView
-                android:id="@+id/tv_weather_fee"
+                android:id="@+id/surcharge_reason"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Đã bao gồm 3,000đ phí thời tiết xấu"
@@ -91,6 +91,7 @@
 
             <!-- Loại đơn -->
             <TextView
+                android:id="@+id/order_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Delivery"
@@ -115,6 +116,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/restaurant_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Gà Rán  Burger Lotteria - Kim Mã"
@@ -123,6 +125,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/restaurant_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1 Núi Trúc, P. Kim Mã, Ba Đình"
@@ -131,6 +134,7 @@
                     android:layout_marginTop="2dp" />
 
                 <TextView
+                    android:id="@+id/estimated_pickup_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Lấy hàng lúc: 12:51"
@@ -147,6 +151,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/customer_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="bin nhớ anhhh"
@@ -155,6 +160,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/delivery_address"
                     android:layout_marginTop="2dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -163,6 +169,7 @@
                     android:textSize="13sp" />
 
                 <TextView
+                    android:id="@+id/estimated_delivery_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Giao hàng lúc: 13:05"
@@ -172,14 +179,13 @@
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
-    <!-- Nút chấp nhận -->
+    
     <Button
-        android:id="@+id/btn_accept"
+        android:id="@+id/btn_complete_order"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_marginHorizontal="16dp"
-        android:text="Chấp nhận (12s)"
+        android:text="Hoàn thành đơn hàng"
         android:textAllCaps="false"
         android:textSize="16sp"
         android:textStyle="bold"

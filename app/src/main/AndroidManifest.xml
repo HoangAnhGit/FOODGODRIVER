@@ -16,6 +16,9 @@
         android:usesCleartextTraffic="true"
         android:networkSecurityConfig="@xml/network_security_config">
         <activity
+            android:name=".FreePickActivity"
+            android:exported="false" />
+        <activity
             android:name=".View.MainActivity"
             android:exported="false" />
         <activity

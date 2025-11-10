@@ -38,7 +38,8 @@ public class AuthRepository {
             public void onResponse(@NonNull Call<LoginResponse> call, @NonNull Response<LoginResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     LoginResponse data = response.body();
-                    TokenManager.getInstance(context).saveToken(data.getToken(), data.getUserType());
+                    // Sửa đổi ở đây: lưu cả token, userType và username
+                    TokenManager.getInstance(context).saveToken(data.getToken(), data.getUserType(), data.getUsername());
                     resultLiveData.setValue(Result.success(response.body()));
                 } else {
                     resultLiveData.setValue(Result.error("Sai số điện thoại hoặc mật khẩu"));

@@ -1,35 +1,32 @@
 package com.example.foodgodriver.View;
 
-// Bỏ dòng import này đi, nó sai và không cần thiết
-// import static androidx.core.content.ContentProviderCompat.requireContext;
-
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.foodgodriver.Network.TokenManager;
-import com.example.foodgodriver.R;
+import com.example.foodgodriver.ViewModel.ShipperViewModel;
 import com.example.foodgodriver.databinding.ActivityProfileMenuBinding;
 
 public class ProfileMenuActivity extends AppCompatActivity {
 
     private ActivityProfileMenuBinding binding;
-
-    private boolean[] hasDot = {true, false, false, true, false, true, false, false, true};
+    private ShipperViewModel shipperViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityProfileMenuBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        shipperViewModel = new ViewModelProvider(this).get(ShipperViewModel.class);
+
+        // Gọi API để lấy tên người dùng
+        fetchShipperName();
 
         binding.imgBack.setOnClickListener(view -> {
             finish();
@@ -39,6 +36,26 @@ public class ProfileMenuActivity extends AppCompatActivity {
             logout();
         });
 
+    }
+
+    private void fetchShipperName() {
+        shipperViewModel.getShipperName().observe(this, result -> {
+            if (result == null) return;
+
+            switch (result.status) {
+                case LOADING:
+                    // Optional: Show a loading indicator
+                    break;
+                case SUCCESS:
+                    if (result.data != null && result.data.getFullName() != null) {
+                        binding.tvUserName.setText(result.data.getFullName());
+                    }
+                    break;
+                case ERROR:
+                    Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        });
     }
 
     public void logout() {

@@ -1,7 +1,5 @@
 package com.example.foodgodriver.View;
 
-// 1. XÓA BỎ IMPORT SAI: import static java.security.AccessController.getContext;
-
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         shipperViewModel = new ViewModelProvider(this).get(ShipperViewModel.class);
+
+        // Lấy và hiển thị tên shipper
+        fetchShipperName();
 
         binding.layoutMenu.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, ProfileMenuActivity.class);
@@ -62,15 +63,12 @@ public class MainActivity extends AppCompatActivity {
                 positiveButtonText = "Sẵn sàng";
             }
 
-            // 3. Tạo và hiển thị Dialog (Sửa context thành 'this' cho rõ ràng)
             new AlertDialog.Builder(this)
                     .setTitle(title)
                     .setMessage(message)
                     .setPositiveButton(positiveButtonText, (dialog, which) -> {
-                        // --- 2. SỬA LỖI LOGIC: Thêm lệnh gọi API ---
                         boolean newStatus = !isCurrentlyAvailable;
-                        callApiToUpdateStatus(newStatus); // <-- GỌI HÀM CẬP NHẬT
-                        // ------------------------------------
+                        callApiToUpdateStatus(newStatus);
                     })
                     .setNegativeButton("Hủy", (dialog, which) -> {
                         dialog.dismiss();
@@ -79,23 +77,26 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void callApiToUpdateStatus(boolean newStatus) {
-        // 1. Hiển thị trạng thái đang tải
-        setLoading(true);
+    private void fetchShipperName() {
+        shipperViewModel.getShipperName().observe(this, result -> {
+            if (result == null || result.data == null) return;
+            if (result.status == com.example.foodgodriver.Utils.Result.Status.SUCCESS) {
+                binding.tvName.setText(result.data.getFullName());
+            }
+            // Optional: Handle ERROR case
+        });
+    }
 
-        // 2. Gọi ViewModel (SỬA LỖI 3: Dùng 'this' thay vì 'getViewLifecycleOwner()')
+    private void callApiToUpdateStatus(boolean newStatus) {
+        setLoading(true);
         shipperViewModel.updateAvailability(newStatus).observe(this, result -> {
             if (result == null) return;
 
             switch (result.status) {
                 case LOADING:
-                    // Đã xử lý ở setLoading(true)
                     break;
                 case SUCCESS:
-                    // 3. API THÀNH CÔNG -> Cập nhật UI
-                    setLoading(false); // Mở khóa nút
-
-                    // Lấy trạng thái chính xác từ server trả về
+                    setLoading(false);
                     boolean isAvailableNow = result.data.isAvailable();
                     if (isAvailableNow) {
                         binding.btnToggleStatus.setText("Sẵn sàng hoạt động");
@@ -108,22 +109,14 @@ public class MainActivity extends AppCompatActivity {
                                 getResources().getColorStateList(android.R.color.darker_gray)
                         );
                     }
-
-                    // (SỬA LỖI 3: Dùng 'this' hoặc 'MainActivity.this' làm Context)
                     Toast.makeText(MainActivity.this, result.data.getMessage(), Toast.LENGTH_SHORT).show();
                     break;
 
                 case ERROR:
-                    // 4. API THẤT BẠI -> Không thay đổi UI
-                    setLoading(false); // Mở khóa nút
-
-                    // (SỬA LỖI 3: Dùng 'this' hoặc 'MainActivity.this' làm Context)
+                    setLoading(false);
                     Toast.makeText(MainActivity.this, result.message, Toast.LENGTH_SHORT).show();
-                    // (Nút bấm vẫn giữ nguyên trạng thái cũ vì API thất bại)
                     break;
             }
-
-            // (SỬA LỖI 3: Dùng 'this' thay vì 'getViewLifecycleOwner()')
             shipperViewModel.updateAvailability(newStatus).removeObservers(this);
         });
     }
@@ -134,7 +127,6 @@ public class MainActivity extends AppCompatActivity {
             binding.btnToggleStatus.setText("Đang cập nhật...");
         } else {
             binding.btnToggleStatus.setEnabled(true);
-            // (Không cần setText ở đây, vì khối 'SUCCESS' sẽ tự đặt text)
         }
     }
 }

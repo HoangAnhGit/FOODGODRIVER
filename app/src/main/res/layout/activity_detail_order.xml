@@ -1,327 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F9F9F9"
+    android:orientation="vertical"
     tools:context=".View.DetailOrderActivity">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <TextView
+        android:id="@+id/tv_restaurant_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Restaurant Name"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_margin="16dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_order_items"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_order" />
 
-        <!-- ===== Header ===== -->
-        <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tv_subtotal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:padding="16dp"
-            android:elevation="2dp">
+            android:text="Subtotal: 0đ"/>
 
-            <ImageButton
-                android:id="@+id/btn_back"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/back"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-            <TextView
-                android:id="@+id/tv_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Chi tiết đơn giao"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/btn_back"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <!-- ===== Trạng thái đơn ===== -->
-        <LinearLayout
+        <TextView
+            android:id="@+id/tv_shipping_fee"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@android:color/white"
-            android:padding="16dp"
-            android:layout_marginTop="1dp">
+            android:text="Shipping Fee: 0đ"/>
 
-            <TextView
-                android:id="@+id/tv_order_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Đơn đang chờ nhận"
-                android:textColor="@color/colorPrimary"
-                android:textStyle="bold"
-                android:textSize="16sp"/>
-
-            <TextView
-                android:id="@+id/tv_order_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Thời gian đặt: 21:45 - 02/11/2025"
-                android:textColor="#888888"
-                android:textSize="13sp"
-                android:layout_marginTop="4dp"/>
-        </LinearLayout>
-
-        <!-- ===== Địa chỉ lấy và giao ===== -->
-        <androidx.cardview.widget.CardView
+        <TextView
+            android:id="@+id/tv_total_amount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp">
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp">
-
-                <!-- Điểm lấy hàng -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Điểm lấy hàng"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tv_pickup_name"
-                    android:text="Quán Quen - Mỹ Chua Cay"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:layout_marginTop="4dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tv_pickup_address"
-                    android:text="71 Ngõ 167 Tây Sơn, Đống Đa, Hà Nội"
-                    android:textColor="#777"
-                    android:textSize="13sp"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#EEEEEE"
-                    android:layout_marginVertical="12dp"/>
-
-                <!-- Điểm giao -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Giao đến"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tv_customer_name"
-                    android:text="Nguyễn Văn A - 0912345678"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:layout_marginTop="4dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tv_delivery_address"
-                    android:text="26 Vương Thừa Vũ, Thanh Xuân, Hà Nội"
-                    android:textColor="#777"
-                    android:textSize="13sp"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- ===== Danh sách món ===== -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:layout_marginBottom="16dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp">
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Chi tiết món"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"/>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rcv_items"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false"
-                    android:layout_marginTop="8dp"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- ===== Thanh toán ===== -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:layout_marginBottom="8dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp">
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Thanh toán"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <!-- Tổng tiền -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="8dp"
-                    android:weightSum="2">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="Tổng cộng:"
-                        android:layout_weight="1"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/tv_total_amount"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="152.000đ"
-                        android:textColor="@color/colorPrimary"
-                        android:textStyle="bold"
-                        android:textSize="14sp"
-                        android:gravity="end"/>
-                </LinearLayout>
-
-                <!-- Tiền trả quán -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="4dp"
-                    android:weightSum="2">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="Trả quán:"
-                        android:layout_weight="1"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/tv_pay_shop"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="120.000đ"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:textColor="@color/red_danger"
-                        android:textStyle="bold"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <!-- Tiền ship -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="4dp"
-                    android:weightSum="2">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Phí giao hàng:"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/tv_shipping_fee"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="32.000đ"
-                        android:textColor="@color/green_success"
-                        android:textStyle="bold"
-                        android:textSize="14sp"
-                        android:gravity="end"/>
-                </LinearLayout>
-
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-
-        <!-- ===== Nút hành động ===== -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:padding="16dp">
-
-            <Button
-                android:id="@+id/btn_accept"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Nhận đơn"
-                android:backgroundTint="@color/colorPrimary"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"
-                android:paddingVertical="10dp"
-                android:layout_marginEnd="8dp"/>
-
-            <Button
-                android:id="@+id/btn_complete"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Hoàn tất"
-                android:backgroundTint="@color/green_success"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"
-                android:paddingVertical="10dp"
-                android:visibility="gone"/>
-        </LinearLayout>
-
+            android:text="Total: 0đ"
+            android:textStyle="bold"/>
     </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

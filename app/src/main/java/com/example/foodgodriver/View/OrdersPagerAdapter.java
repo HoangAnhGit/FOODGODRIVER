@@ -14,14 +14,16 @@ public class OrdersPagerAdapter  extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         if (position == 0) {
-            return new DoingOrdersFragment();
+            return new DoingOrdersFragment(); // Tab "Đang làm"
         } else {
-            return new FreePickFragment();
+            // Trả về FreePickFragment cho tab "FREE-PICK"
+            return new FreePickFragment(); 
         }
     }
 
     @Override
     public int getItemCount() {
+        // Chúng ta có 2 tab
         return 2;
     }
 }
